@@ -1,3 +1,12 @@
+/*
+Основное ДЗ:
+1 задание:
+
+Создайте процедуру ИЛИ функцию, которая принимает кол-во сек и формат их в кол-во дней, часов, минут и секунд.
+Пример: 123456 ->'1 days 10 hours 17 minutes 36 seconds '
+*/
+
+
 CREATE DATABASE IF NOT EXISTS seminar_sql_end;
 
 USE seminar_sql_end;
@@ -48,4 +57,35 @@ DELIMITER ;
 
 SELECT seminar_sql_end.sec_function(4563456)
 
+/*
+2 задание:
 
+Выведите только четные числа от 1 до 10 (Через цикл).
+Пример: 2,4,6,8,10
+*/
+
+CREATE DATABASE IF NOT EXISTS HW_2;
+
+USE HW_2;
+
+DELIMITER $$ 
+
+CREATE PROCEDURE even_numbers (IN count_number int, OUT result varchar(255))
+BEGIN
+  DECLARE i int DEFAULT 2;
+
+  SET result = '';
+
+  WHILE i < count_number DO
+    SET result = CONCAT(result, CAST(i AS char), ' '); 
+    SET i = i + 2;
+  END WHILE;
+
+END
+$$
+
+DELIMITER ;
+
+SET @even = '';
+CALL HW_2.even_numbers(20, @even);
+SELECT @even;
